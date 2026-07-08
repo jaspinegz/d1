@@ -24,10 +24,10 @@ in
         enable = true;
         enableCli = true; # Optional: for parameter discovery
         parameters = {
-          sensMultiplier = 0.5;
+          sensMultiplier = 1.0;
           mode = "natural";
-          decayRate = 0.0275;
-          offset = 0.5;
+          decayRate = 0.01;
+          offset = 2.0;
           limit = 2.0;
         };
       };

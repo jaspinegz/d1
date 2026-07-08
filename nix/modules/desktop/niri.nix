@@ -90,6 +90,7 @@ in
         "Mod+Shift+E".action.quit = {};
         "Mod+Shift+Q".action.close-window = {};
         "Mod+Equal".action.switch-preset-column-width = {};
+        "Mod+Space" = lib.mkForce { action.toggle-window-floating = {}; };
       };
 
       programs.niri.settings.spawn-at-startup = [
