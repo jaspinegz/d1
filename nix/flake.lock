@@ -26,7 +26,7 @@
     "agenix-secrets": {
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-PC+9dY8tVWE0vnsVCnAlDhGL6BMCPMo5UiIQ8pJQT4Q=",
+        "narHash": "sha256-8S+zuRrIssJDunFeLNIqRwIgW0U+nrxs2kz1b498lYs=",
         "path": "./agenix-secrets",
         "type": "path"
       },
@@ -831,7 +831,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-WQlAqkbVFlRdI9dqKE205lK59tHE6/k7CANVG4Fjkpk=",
+        "narHash": "sha256-9KYb/6Q6vx08oaXq2+RFUJe2GODShFVvp6XjFPNb1pY=",
         "path": "./vendor/mandoc",
         "type": "path"
       },

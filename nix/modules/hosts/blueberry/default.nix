@@ -187,12 +187,10 @@ in
         zed-editor
         helix
         libreoffice
+        krita
         # Browsers
         # - firefox included with module
         chromium
-        # AI stuff
-        claude-code
-        claude-code-acp
         # Music
         feishin
         tidal-hifi
