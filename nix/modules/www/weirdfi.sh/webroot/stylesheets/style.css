@@ -97,6 +97,8 @@ a.Sx:before { content: "→ "; }
   border-radius: 6px;
   border: 1px solid var(--c2);
   background-color: var(--bg-darken);
+  font-size: 11pt;
+  text-indent: 0pt !important;
 }
 
 pre {
@@ -110,6 +112,12 @@ pre {
   border-left-width: 12px;
   background-color: var(--bg-darken);
   padding: 1ch;
+}
+
+.Bd.info pre,
+.Bd.warn pre {
+  overflow: hidden;
+  white-space: wrap;
 }
 
 .Bd.info { border-color: var(--c3); }
