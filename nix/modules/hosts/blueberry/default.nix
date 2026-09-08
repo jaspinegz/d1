@@ -46,9 +46,9 @@ in
           ];
         })
         nixos.avahi
-        nixos.drivers-nvidia
-        nixos.drivers-maccel
         nixos.desktop-wooting
+        nixos.drivers-maccel
+        nixos.drivers-nvidia
         nixos.home-manager
         {
           by.presets.home-manager.user = "jaspine";
@@ -57,6 +57,7 @@ in
         home-manager.blueberry-hardware
         # Desktop environment
         home-manager.dank-material-shell
+        home-manager.desktop-xdg
         home-manager.niri
         home-manager.way-displays
         # Programs
@@ -67,6 +68,21 @@ in
         home-manager.prism-launcher
         # 3rd party modules
         inputs.agenix.nixosModules.default
+        inputs.nix-flatpak.nixosModules.nix-flatpak
+        {
+          #TODO this should be handled already
+          xdg.portal.enable = true;
+          xdg.portal.extraPortals = with prebuiltPackages.${system}; [
+            xdg-desktop-portal-gtk
+          ];
+          services.flatpak = {
+            enable = true;
+            packages = [
+              "com.infinipaint.infinipaint"
+            ];
+            update.onActivation = true;
+          };
+        }
       ];
     };
 

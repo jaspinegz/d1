@@ -2,8 +2,6 @@
   description = "NixOS configuration as a flake";
 
   inputs = {
-    # TODO: use fork until fix is merged
-    # TODO: use fork whenever upstream is outdated
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     agenix.url = "github:ryantm/agenix";
     awww.url = "git+https://codeberg.org/LGFae/awww";
@@ -32,6 +30,7 @@
     niri.url = "github:sodiboo/niri-flake";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     nix-rosetta-builder.inputs.nixpkgs.follows = "nixpkgs";
