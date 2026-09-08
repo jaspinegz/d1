@@ -139,6 +139,7 @@ show-flakegraph: render-flakegraph
 setup-remotes:
 	git remote add github git@github.com:jaspinegz/d1.git || true
 	git remote add srv jaspine@weirdfi.sh:/data/git/d1.git || true
+	git fetch srv
 	git branch -u srv/master
 
 push:
