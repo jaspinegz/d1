@@ -1,0 +1,13 @@
+diff --git a/mdoc_html.c b/mdoc_html.c
+index 811d39d..954ad66 100644
+--- a/mdoc_html.c
++++ b/mdoc_html.c
+@@ -958,8 +958,6 @@ mdoc_bd_pre(MDOC_ARGS)
+ 			break;
+ 	}
+ 	(void)strlcpy(buf, "Bd", sizeof(buf));
+-	if (comp == 0)
+-		(void)strlcat(buf, " Pp", sizeof(buf));
+ 
+ 	/* Handle the -offset argument. */
+ 

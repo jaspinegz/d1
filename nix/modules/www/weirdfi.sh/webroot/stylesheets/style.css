@@ -172,7 +172,7 @@ sup {
   position-anchor: --anchor-head;
   border: none;
 }
-.Bd.aside-h:after {
+/*.Bd.aside-h:after {
   background: url("/marbled-healthy.png");
   width: 114px;
   height: 432px;
@@ -180,7 +180,7 @@ sup {
   display: inline-block;
   background-size: 114px 432px;
   image-rendering: pixelated;
-}
+}*/
 
 .anchor-1 { anchor-name: --anchor-1; }
 .anchor-2 { anchor-name: --anchor-2; }

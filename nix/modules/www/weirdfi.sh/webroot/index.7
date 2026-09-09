@@ -27,7 +27,16 @@ blog is open-source, along with the rest of my infrastructure.
 Some other things I'm interested in: playing guitar, piano, watering my plants
 (when I remember, which isn't very often), capybaras, and whimsy wherever I can
 get away with it. ♡
-.Bd -decorate "aside aside-h" 
+.Bd -literal -decorate "aside aside-h" 
+__HTML
+<canvas id="aside-animated-plant" width=120 height=423></canvas>
+<script>
+let canvas = document.getElementById("aside-animated-plant");
+let ctx    = canvas.getContext("2d");
+ctx.fillStyle = "red";
+ctx.fillRect(10, 10, 150, 150);
+</script>
+__ENDHTML
 .Ed
 .Pp
 .Lk https://weirdfi.sh/posts posts

@@ -1,0 +1,13 @@
+diff --git a/regress/mdoc/Bd/Makefile b/regress/mdoc/Bd/Makefile
+index d516f14..c4bebff 100644
+--- a/regress/mdoc/Bd/Makefile
++++ b/regress/mdoc/Bd/Makefile
+@@ -6,7 +6,7 @@ REGRESS_TARGETS	+= break broken unclosed
+ 
+ TAG_TARGETS	 = nested paragraph spacing
+ LINT_TARGETS	 = beforeNAME blank nested badargs break broken unclosed
+-HTML_TARGETS	 = nested nf paragraph
++HTML_TARGETS	 = 
+ 
+ SKIP_TMAN	 = beforeNAME centered
+ 

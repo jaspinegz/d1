@@ -1,0 +1,13 @@
+diff --git a/mdoc_html.c b/mdoc_html.c
+index 954ad66..4798713 100644
+--- a/mdoc_html.c
++++ b/mdoc_html.c
+@@ -930,7 +930,7 @@ mdoc_sx_pre(MDOC_ARGS)
+ static int
+ mdoc_bd_pre(MDOC_ARGS)
+ {
+-	char			 buf[20];
++	char			 buf[100];
+ 	struct roff_node	*nn;
+ 	int			 comp;
+ 
