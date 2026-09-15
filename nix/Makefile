@@ -106,7 +106,7 @@ else
 		--rollback-succeeded false \
 		-- \
 		$(BUILDER_OPTS) \
-		--builders '$(BUILDERS_WIFI_OUT)' \
+		--builders '$(BUILDERS)' \
 		--max-jobs 0 \
 		$(NOM) 
 endif

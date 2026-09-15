@@ -132,8 +132,11 @@ in
       users.groups.jaspine = { };
       nix.settings.trusted-users = [ "jaspine" ];
 
+      age.secrets.tailscale-auth-key.file = "${inputs.agenix-secrets}/agenix/tailscale/hosts/fooberry.age";
+    
       services.tailscale = {
-        enable = true;
+        enable = true; 
+        authKeyFile = config.age.secrets.tailscale-auth-key.path;
         useRoutingFeatures = lib.mkDefault "both";
       };
 
@@ -174,8 +177,8 @@ in
     });
 
   flake.deploy.nodes.fooberry = {
-    hostname = "fooberry";
-    sshUser = "jaspine";
+    hostname = "192.168.1.135";
+    sshUser = "root";
     remoteBuild = false;
     profiles.system = {
       user = "root";
