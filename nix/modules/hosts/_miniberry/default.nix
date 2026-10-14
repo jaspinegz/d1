@@ -38,8 +38,6 @@ in
           ];
         };
       }
-      # Declarative VMs
-      darwin.vm-mb-build-aarch64
       # Home-manager
       darwin.home-manager
       {
