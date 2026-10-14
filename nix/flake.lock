@@ -26,7 +26,7 @@
     "agenix-secrets": {
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-7UtnejnHvBA7QM8JidrsyG9qx2H9j+s2CaCe1MYfAyQ=",
+        "narHash": "sha256-6oPYRgmF3ShqpzlbO/ANSzCWM+/Scc/QsLrYmcoGcTQ=",
         "path": "./agenix-secrets",
         "type": "path"
       },

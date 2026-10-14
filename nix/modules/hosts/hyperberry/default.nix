@@ -259,6 +259,14 @@ in
         "Z /data        770 root   data" 
       ];
 
+      age.secrets.tailscale-auth-key.file = "${inputs.agenix-secrets}/agenix/tailscale/hosts/hyperberry.age";
+    
+      services.tailscale = {
+        enable = true; 
+        authKeyFile = config.age.secrets.tailscale-auth-key.path;
+        useRoutingFeatures = lib.mkDefault "both";
+      };
+
       ##########################################################################################
       # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
       # In the vast majority of cases, do not change this version.
