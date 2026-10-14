@@ -125,6 +125,8 @@ pre {
 
 .Bd.aside { border: 1px dashed var(--c2); }
 
+.Bd.quote { border: none; margin-left: 3ch; margin-right: 3ch; }
+
 /* prevent bottom margin when using paragraphs inside display blocks */
 .Bd .Pp { margin-bottom: 0; }
 
