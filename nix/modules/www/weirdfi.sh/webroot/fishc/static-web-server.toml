@@ -1,0 +1,10 @@
+[general]
+host = "::"
+port = 8080
+root = "./result"
+
+[[advanced.headers]]
+source = "**/*.{html,js,wasm}"
+[advanced.headers.headers]
+Cross-Origin-Embedder-Policy = "require-corp"
+Cross-Origin-Opener-Policy = "same-origin"
