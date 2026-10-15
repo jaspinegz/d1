@@ -8,11 +8,11 @@
   outputs = { self, nixpkgs, flake-utils }: flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = nixpkgs.legacyPackages.${system};
-      package = pkgs.callPackage ./package.nix { };
+      package = pkgs.callPackage ./package.nix { target = "index.html"; };
     in
     {
       packages.default = package;
-      packages.wasm-fishtank = package;
+      packages.fishtank = package;
 
       devShell = pkgs.mkShell rec {
         inherit (package) nativeBuildInputs buildInputs;

@@ -1,6 +1,7 @@
 {
   pkgs,
   stdenv,
+  target ? "index.js",
   ...
 }:
 let
@@ -31,7 +32,7 @@ stdenv.mkDerivation rec {
       -sENVIRONMENT=web,worker -sEXIT_RUNTIME=1 \
       -std=gnu11 -O3 \
       fish.c \
-      -o target/index.js
+      -o "target/${target}"
   '';
 
   installPhase = ''
