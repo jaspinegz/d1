@@ -15,36 +15,28 @@ static GLFWwindow *window;
 static GLuint shader_program, vao;
 
 static void loop(void) {
-    // Update window events.
     glfwPollEvents();
 
-    // Wipe the drawing surface clear.
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
-    // Put the shader program, and the VAO, in focus in OpenGL's state machine.
     glUseProgram( shader_program );
     glBindVertexArray( vao );
 
-    // Draw points 0-3 from the currently bound VAO with current in-use shader.
     glDrawArrays( GL_TRIANGLES, 0, 3 );
 
-    // Put the stuff we've been drawing onto the visible area.
     glfwSwapBuffers( window );
 }
 
 int main( void ) {
-  // Start OpenGL context and OS window using the GLFW helper library.
   if ( !glfwInit() ) {
     fprintf( stderr, "ERROR: could not start GLFW3.\n" );
     return 1;
   }
 
-  // Request an OpenGL 4.1, core, context from GLFW.
   glfwWindowHint( GLFW_CLIENT_API, GLFW_OPENGL_ES_API );
   glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 3 );
   glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 0 );
 
-  // Create a window on the operating system, then tie the OpenGL context to it.
   window = glfwCreateWindow( SCREEN_WIDTH, SCREEN_HEIGHT, "Hello Triangle", NULL, NULL );
   if ( !window ) {
     fprintf( stderr, "ERROR: Could not open window with GLFW3.\n" );
@@ -100,7 +92,6 @@ int main( void ) {
 
   emscripten_set_main_loop(loop, 0, 1);
   
-  // Close OpenGL window, context, and any other GLFW resources.
   glfwTerminate();
   return 0;
 }

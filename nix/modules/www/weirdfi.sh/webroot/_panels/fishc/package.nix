@@ -31,11 +31,11 @@ stdenv.mkDerivation rec {
       -sENVIRONMENT=web,worker -sEXIT_RUNTIME=1 \
       -std=gnu11 -O3 \
       fish.c \
-      -o target/index.html
+      -o target/index.js
   '';
 
   installPhase = ''
-    mkdir -p $out
-    cp target/* $out
+    mkdir $out/
+    cp -v target/* $out/
   '';
 }

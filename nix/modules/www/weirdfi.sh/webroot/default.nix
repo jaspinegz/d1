@@ -90,6 +90,10 @@ in
               name = "under-construction.png";
               path = ./resources/under-construction.png;
             }
+            {
+              name = "fishtank";
+              path = import _panels/fishc { inherit pkgs; };
+            }
           ];
         in
         pkgs.linkFarm "webroot" (files ++ permalinks ++ resources);
