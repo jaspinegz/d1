@@ -5,8 +5,10 @@
   ...
 }:
 let
-  name = "fishtank";
-  inherit (pkgs.lib) getExe;
+  name = "fishc";
+  inherit (pkgs) lib;
+
+  shaders = import ./shaders { inherit pkgs stdenv; };
 in
 stdenv.mkDerivation rec {
   inherit name;
@@ -20,9 +22,31 @@ stdenv.mkDerivation rec {
   ];
   #LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath buildInputs;
 
+  patchPhase = 
+    let
+      shaderReplacements = lib.mapAttrsToList (shaderName: shader:
+        let
+          vert = "${shader}/${shaderName}.vert";
+          frag = "${shader}/${shaderName}.frag";
+        in
+        ''
+          --replace-fail '@@vert:${shaderName}@@' "$(cat ${vert})" \
+          --replace-fail '@@frag:${shaderName}@@' "$(cat ${frag})"
+        '') shaders;
+      shaderReplacementTexts = lib.strings.join " \\" shaderReplacements;
+    in
+    ''
+      cp -rv $src intermediates
+      FILES=$(find intermediates -name *.c)
+      for f in $FILES; do
+        substituteInPlace $f ${shaderReplacementTexts}
+      done
+    '';
+
   buildPhase = ''
-    mkdir target/
     runHook preBuild
+    mkdir target/
+
     emcc \
       -lGL -lglfw3 \
       -sWASM=1 \
@@ -31,7 +55,7 @@ stdenv.mkDerivation rec {
       -sINITIAL_MEMORY=1073741824 \
       -sENVIRONMENT=web,worker -sEXIT_RUNTIME=1 \
       -std=gnu11 -O3 \
-      fish.c \
+      work/fish.c \
       -o "target/${target}"
   '';
 
