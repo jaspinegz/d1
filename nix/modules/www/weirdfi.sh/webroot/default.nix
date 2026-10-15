@@ -86,6 +86,10 @@ in
               name = "marbled-healthy.png";
               path = ./resources/marbled-healthy.png;
             }
+            {
+              name = "under-construction.png";
+              path = ./resources/under-construction.png;
+            }
           ];
         in
         pkgs.linkFarm "webroot" (files ++ permalinks ++ resources);

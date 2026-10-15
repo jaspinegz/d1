@@ -169,12 +169,25 @@ sup {
   anchor-name: --anchor-head;
 }
 
-.Bd.aside-h {
-  position: absolute;
+/* TODO generalize this */
+.Bd.aside-left-head-1,
+.Bd.aside-right-head-1 {
   position-anchor: --anchor-head;
+  position: absolute;
   border: none;
 }
-.Bd.aside-h:after {
+.Bd.aside-left-head-1 { anchor-name: --anchor-left-head-1; }
+.Bd.aside-right-head-1 { anchor-name: --anchor-right-head-1; }
+
+.Bd.aside-left-head-2,
+.Bd.aside-right-head-2 {
+  border: none;
+  position: absolute;
+}
+.Bd.aside-left-head-2  { position-anchor: --anchor-left-head-1;  }
+.Bd.aside-right-head-2 { position-anchor: --anchor-right-head-1; }
+
+.Bd.aside-decoration-marble-plant:after {
   background: url("/marbled-healthy.png");
   width: 114px;
   height: 432px;
@@ -182,6 +195,17 @@ sup {
   display: inline-block;
   background-size: 114px 432px;
   image-rendering: pixelated;
+  margin-left: 4ch;
+}
+.Bd.aside-decoration-placeholder:after {
+  background: url("/under-construction.png");
+  width: 176px;
+  height: 432px;
+  content: "";
+  display: inline-block;
+  background-size: 176px 432px;
+  image-rendering: pixelated;
+  border: 1px solid black;
 }
 
 .anchor-1 { anchor-name: --anchor-1; }
@@ -212,7 +236,8 @@ sup {
 }
 
 /* aside positioning */
-.Bd.aside-h,
+.Bd.aside-left-head-1,
+.Bd.aside-right-head-1,
 .Bd.aside-1,
 .Bd.aside-2,
 .Bd.aside-3,
@@ -227,10 +252,33 @@ sup {
   width: 30ch;
   top: anchor(top);
   left: anchor(right);
+}
+
+.Bd.aside-1,
+.Bd.aside-2,
+.Bd.aside-3,
+.Bd.aside-4,
+.Bd.aside-5,
+.Bd.aside-6,
+.Bd.aside-7,
+.Bd.aside-8,
+.Bd.aside-9 { 
   margin-left: 4ch;
 }
 
+/* aside head cascading */
+.Bd.aside-left-head-2,
+.Bd.aside-right-head-2 {
+  position: absolute;
+  position-visibility: always;
+  width: 30ch;
+  top: anchor(bottom);
+  left: anchor(left);
+}
+
 /* alternate side */
+.Bd.aside-left-head-1,
+.Bd.aside-left-head-2,
 .Bd.aside-2,
 .Bd.aside-4,
 .Bd.aside-6,
@@ -238,6 +286,16 @@ sup {
   left: 0;
   right: anchor(left);
   margin-left: auto;
+}
+
+.Bd.aside-left-head-2 {
+  right: anchor(right);
+}
+
+.Bd.aside-2,
+.Bd.aside-4,
+.Bd.aside-6,
+.Bd.aside-8 {
   margin-right: 4ch;
 }
 
