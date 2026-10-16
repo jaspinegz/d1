@@ -37,17 +37,17 @@ stdenv.mkDerivation rec {
           vert_syntax = mkCLiteral vert;
           frag_syntax = mkCLiteral frag;
         in
-        ''
-          --replace-fail '@@vert:${shaderName}@@' "$(cat ${vert_syntax})" \
-          --replace-fail '@@frag:${shaderName}@@' "$(cat ${frag_syntax})"
+        ''--replace-fail '@@vert:${shaderName}@@' "$(cat ${vert_syntax})" \
+          --replace-fail '@@frag:${shaderName}@@' "$(cat ${frag_syntax})" \
         '') shaders;
-      shaderReplacementTexts = lib.strings.join " \\" shaderReplacements;
+      shaderReplacementTexts = lib.strings.join " " shaderReplacements;
     in
     ''
       cp -rv "$src" intermediates
       FILES=$(find intermediates -name *.c)
       for f in $FILES; do
         substituteInPlace $f ${shaderReplacementTexts}
+
       done
     '';
 

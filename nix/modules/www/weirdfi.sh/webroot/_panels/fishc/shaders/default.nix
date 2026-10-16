@@ -33,4 +33,6 @@ let
 in
 {
   tank = mkShader "tank" ./tank.slang;
+  fish = mkShader "fish" ./fish.slang;
+  dither = mkShader "dither" ./dither.slang;
 }

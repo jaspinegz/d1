@@ -114,9 +114,9 @@ VertexOutput v_main(VertexInput input) {
 }
 
 [shader("fragment")]   
-float4 f_main(VertexOutput input) : SV_Target {
+float4 f_main(VertexOutput input) : SV_Target1 {
     float2 pos = input.position.xy + float2(1.0, 1.0);
-    float n = snoise(float3(pos.x, pos.y, (float)ticks)/300.0);
+    float n = snoise(float3(pos.x+ticks, pos.y, ticks)/100.0);
 
     float r = lerp(water1.r, water2.r, n);
     float g = lerp(water1.g, water2.g, n);
