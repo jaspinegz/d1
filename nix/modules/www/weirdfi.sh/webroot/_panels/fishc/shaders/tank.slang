@@ -17,6 +17,6 @@ VertexOutput v_main(VertexInput input) {
 
 [shader("fragment")]   
 float4 f_main(VertexOutput input) : SV_Target {
-    float4 color = float4(1.0, 0.0, 0.0, 1.0);
+    float4 color = float4(((input.position.x * 10.0) % 100.0) / 100.0f, 0.0, 0.0, 1.0);
     return color;
 }

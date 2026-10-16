@@ -9,6 +9,12 @@ let
   inherit (pkgs) lib;
 
   shaders = import ./shaders { inherit pkgs stdenv; };
+  mkCLiteral = drv: pkgs.runCommand "mk-c-literal" { } ''
+    cp -v "${drv}" "$out"
+    sed -i 's/"/\\"/g'  "$out"
+    sed -i 's/^/"/g'    "$out"
+    sed -i 's/$/\\n"/g' "$out"
+  '';
 in
 stdenv.mkDerivation rec {
   inherit name;
@@ -28,15 +34,17 @@ stdenv.mkDerivation rec {
         let
           vert = "${shader}/${shaderName}.vert";
           frag = "${shader}/${shaderName}.frag";
+          vert_syntax = mkCLiteral vert;
+          frag_syntax = mkCLiteral frag;
         in
         ''
-          --replace-fail '@@vert:${shaderName}@@' "$(cat ${vert})" \
-          --replace-fail '@@frag:${shaderName}@@' "$(cat ${frag})"
+          --replace-fail '@@vert:${shaderName}@@' "$(cat ${vert_syntax})" \
+          --replace-fail '@@frag:${shaderName}@@' "$(cat ${frag_syntax})"
         '') shaders;
       shaderReplacementTexts = lib.strings.join " \\" shaderReplacements;
     in
     ''
-      cp -rv $src intermediates
+      cp -rv "$src" intermediates
       FILES=$(find intermediates -name *.c)
       for f in $FILES; do
         substituteInPlace $f ${shaderReplacementTexts}
@@ -55,12 +63,12 @@ stdenv.mkDerivation rec {
       -sINITIAL_MEMORY=1073741824 \
       -sENVIRONMENT=web,worker -sEXIT_RUNTIME=1 \
       -std=gnu11 -O3 \
-      work/fish.c \
+      intermediates/fish.c \
       -o "target/${target}"
   '';
 
   installPhase = ''
-    mkdir $out/
-    cp -v target/* $out/
+    mkdir "$out"
+    cp -v target/* "$out"
   '';
 }

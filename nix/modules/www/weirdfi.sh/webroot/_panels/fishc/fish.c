@@ -12,8 +12,8 @@ const int V_SCALE = 2;
 const int SCREEN_WIDTH = V_SCREEN_WIDTH * V_SCALE;
 const int SCREEN_HEIGHT = V_SCREEN_HEIGHT * V_SCALE;
 
-const char *tank_vertex_shader   = "@@vert:tank@@";
-const char *tank_fragment_shader = "@@frag:tank@@";
+const char *tank_vertex_shader   = @@vert:tank@@;
+const char *tank_fragment_shader = @@frag:tank@@;
 
 static GLFWwindow *window;
 static GLuint shader_tank, vbo_tank, vao_tank;
@@ -40,7 +40,7 @@ static GLFWwindow* init_window() {
 }
 
 static void create_tank_shader() {
-    float tank_vertices[] = {
+    const float tank_vertices[] = {
         -1.0f, -1.0f, 0.0f,
         +1.0f, -1.0f, 0.0f,
         -1.0f, +1.0f, 0.0f,
@@ -72,13 +72,18 @@ static void create_tank_shader() {
     glAttachShader(shader_tank, fs);
     glAttachShader(shader_tank, vs);
     glLinkProgram(shader_tank);
+    glValidateProgram(shader_tank);
 }
 
 static void draw_tank() {
     //TODO
     glUseProgram(shader_tank);
     glBindVertexArray(vao_tank);
+
     glDrawArrays(GL_TRIANGLES, 0, 6);
+
+    glBindVertexArray(0);
+    glUseProgram(0);
 }
 
 static void draw_water() {
@@ -103,6 +108,7 @@ static void render() {
 int main(void) {
     init_glfw();
     init_window();
+    init_shaders();
 
     emscripten_set_main_loop(render, 0, 1);
 
