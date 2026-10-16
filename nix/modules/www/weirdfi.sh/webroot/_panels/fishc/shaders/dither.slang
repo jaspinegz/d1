@@ -39,15 +39,19 @@ VertexOutput v_main(VertexInput input) {
 
 [shader("fragment")]   
 float4 f_main(VertexOutput input) : SV_Target {
-    float4 colour = texture_vscreen[input.position.xy * 2.0];
+    float4 colour = texture_vscreen[input.position.xy];
+    float v = (colour.r+colour.g+colour.b)/3.0;
 
     // dither
     float2 xy = input.position.xy;
-    int x = int(fmod(xy.x, 4));
-    int y = int(fmod(xy.y, 4));
-    float r = closest(x, y, colour.r);
-    float g = closest(x, y, colour.g);
-    float b = closest(x, y, colour.b);
-
+    int x = int(fmod(xy.x, 8));
+    int y = int(fmod(xy.y, 8));
+    float ve = closest(x, y, v);
+    float r = (colour.r/v)*ve;
+    float g = (colour.g/v)*ve;
+    float b = (colour.b/v)*ve;
+    //float r = closest(x, y, colour.r);
+    //float g = closest(x, y, colour.g);
+    //float b = closest(x, y, colour.b);
     return float4(r, g, b, 1.0);
 }
