@@ -8,9 +8,9 @@
 const int SCREEN_WIDTH = 176;
 const int SCREEN_HEIGHT = 432;
 
-const int VSCALE = 1;
-const int VSCREEN_WIDTH = SCREEN_WIDTH / VSCALE;
-const int VSCREEN_HEIGHT = SCREEN_HEIGHT / VSCALE;
+const int VSCALE = 2;
+const int VSCREEN_WIDTH = SCREEN_WIDTH * VSCALE;
+const int VSCREEN_HEIGHT = SCREEN_HEIGHT * VSCALE;
 
 const float vscreen_quad[] = {
     -1.0f, -1.0f, 0.0f,
