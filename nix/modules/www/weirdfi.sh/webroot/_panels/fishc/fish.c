@@ -12,10 +12,17 @@ const int V_SCALE = 2;
 const int SCREEN_WIDTH = V_SCREEN_WIDTH * V_SCALE;
 const int SCREEN_HEIGHT = V_SCREEN_HEIGHT * V_SCALE;
 
+static struct {
+    float screen[3];
+    unsigned int ticks;
+} uniforms;
+
 const char *tank_vertex_shader   = @@vert:tank@@;
 const char *tank_fragment_shader = @@frag:tank@@;
 
 static GLFWwindow *window;
+static int enable_uniforms = 0;
+static GLuint ubo_uniforms;
 static GLuint shader_tank, vbo_tank, vao_tank;
 
 static void init_glfw() {
@@ -78,10 +85,17 @@ static void create_tank_shader() {
 static void draw_tank() {
     //TODO
     glUseProgram(shader_tank);
+    //upload uniforms
+    if (enable_uniforms) {
+        glBindBuffer(GL_UNIFORM_BUFFER, ubo_uniforms);
+        glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(uniforms), &uniforms);
+    }
+    //attach tank vertices
     glBindVertexArray(vao_tank);
-
+    //draw
     glDrawArrays(GL_TRIANGLES, 0, 6);
-
+    //cleanup
+    glBindBuffer(GL_UNIFORM_BUFFER, 0);
     glBindVertexArray(0);
     glUseProgram(0);
 }
@@ -92,11 +106,46 @@ static void draw_water() {
 static void draw_fish() {
 }
 
+static void init_uniforms(GLint program) {
+    glUseProgram(program);
+
+    const GLuint binding_uniforms = 1; 
+    GLint index = glGetUniformBlockIndex(program, "GlobalParams_std140");
+
+    if (index == GL_INVALID_INDEX) {
+        printf("UBO not found, probably optimized away\n");
+        enable_uniforms = 0;
+        glUseProgram(0);
+        return;
+    }
+    enable_uniforms = 1;
+
+    glUniformBlockBinding(program, index, binding_uniforms);   
+
+    GLint size;
+    glGetActiveUniformBlockiv(program, index, GL_UNIFORM_BLOCK_DATA_SIZE, &size);
+
+    glGenBuffers(1, &ubo_uniforms);
+    glBindBuffer(GL_UNIFORM_BUFFER, ubo_uniforms);
+    glBufferData(GL_UNIFORM_BUFFER, size, NULL, GL_DYNAMIC_DRAW);
+
+    glBindBufferBase(GL_UNIFORM_BUFFER, binding_uniforms, ubo_uniforms);
+
+    glUseProgram(0);
+}
+
 static void init_shaders() {
+    uniforms.screen[0] = SCREEN_WIDTH;
+    uniforms.screen[1] = SCREEN_HEIGHT;
+    uniforms.screen[2] = 1.0;
+    uniforms.ticks = 0;
+
     create_tank_shader();
+    init_uniforms(shader_tank);
 }
 
 static void render() {
+    uniforms.ticks++;
     glfwPollEvents();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     draw_tank();
