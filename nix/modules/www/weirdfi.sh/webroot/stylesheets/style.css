@@ -288,6 +288,11 @@ sup {
   margin-left: auto;
 }
 
+/* TODO */
+#canvas {
+  border-radius: 10px;
+}
+
 .Bd.aside-left-head-2 {
   right: anchor(right);
 }
