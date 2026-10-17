@@ -14,6 +14,6 @@ VertexOutput v_main(VertexInput input) {
 }
 
 [shader("fragment")]   
-float4 f_main(VertexOutput input) : SV_Target {
-    return float4(0.0, 0.0, 0.0, 0.0);
+float4 f_main(VertexOutput input) : SV_Target1 {
+    return float4(1.0, 0.0, 0.0, 1.0);
 }

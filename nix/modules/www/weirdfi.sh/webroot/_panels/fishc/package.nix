@@ -28,25 +28,30 @@ stdenv.mkDerivation rec {
   ];
   #LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath buildInputs;
 
+        #let
+        #  vert = "${shader}/${shaderName}.vert";
+        #  frag = "${shader}/${shaderName}.frag";
+        #  vert_syntax = mkCLiteral vert;
+        #  frag_syntax = mkCLiteral frag;
+        #in
+        #''--replace-fail '@@vert:${shaderName}@@' "$(cat ${vert_syntax})" \
+        #  --replace-fail '@@frag:${shaderName}@@' "$(cat ${frag_syntax})" \
+        #'') shaders;
   patchPhase = 
     let
-      shaderReplacements = lib.mapAttrsToList (shaderName: shader:
-        let
-          vert = "${shader}/${shaderName}.vert";
-          frag = "${shader}/${shaderName}.frag";
-          vert_syntax = mkCLiteral vert;
-          frag_syntax = mkCLiteral frag;
-        in
-        ''--replace-fail '@@vert:${shaderName}@@' "$(cat ${vert_syntax})" \
-          --replace-fail '@@frag:${shaderName}@@' "$(cat ${frag_syntax})" \
-        '') shaders;
-      shaderReplacementTexts = lib.strings.join " " shaderReplacements;
+      shaderReplacements = lib.concatMapAttrsStringSep "\n" (shaderName: shader: 
+        lib.concatMapStringsSep "\n" (stage:
+          (let
+            syntax = mkCLiteral "${shader.drv}/${shaderName}.${stage}";
+          in ''--replace-fail '@@${stage}:${shaderName}@@' "$(cat ${syntax})" \'')
+        ) shader.stages
+      ) shaders;
     in
     ''
       cp -rv "$src" intermediates
       FILES=$(find intermediates -name *.c)
       for f in $FILES; do
-        substituteInPlace $f ${shaderReplacementTexts}
+        substituteInPlace $f ${shaderReplacements}
 
       done
     '';
@@ -56,7 +61,7 @@ stdenv.mkDerivation rec {
     mkdir target/
 
     emcc \
-      -lGL -lglfw3 \
+      -lGL -lglfw3 -lm \
       -sWASM=1 \
       -sUSE_GLFW=3 \
       -sUSE_WEBGL2=1 -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 \

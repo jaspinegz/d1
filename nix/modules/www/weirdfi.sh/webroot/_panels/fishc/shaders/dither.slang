@@ -40,8 +40,6 @@ float3 _8b(float3 c) {
 
 static const float3 water1 = float3(68/255.0,114/255.0,222/255.0);
 static const float3 water2 = float3(8/255.0,69/255.0,94/255.0);
-static const float3 water1_8b = _8b(water1);
-static const float3 water2_8b = _8b(water2);
 
 float3 closest(int x, int y, float3 colour) {
     int dither[8*8] = {
@@ -63,6 +61,7 @@ float3 closest(int x, int y, float3 colour) {
     float mag = (colour.r+colour.g+colour.b)/3.0;
     if (mag < limit) {
         //darken by picking a darker 8-bit shade
+        float3 water1_8b = _8b(water1);
         float r = water1_8b.r;
         float g = water1_8b.g;
         float b = water1_8b.b;
@@ -86,7 +85,7 @@ VertexOutput v_main(VertexInput input) {
 
 [shader("fragment")]   
 float4 f_main(VertexOutput input) : SV_Target {
-    float4 colour = texture_vscreen[input.position.xy];
+    float4 colour = texture_vscreen[floor(input.position.xy)];
 
     float r = (floor((colour.r*255.0)/8.0)*8.0)/255.0;
     float g = (floor((colour.g*255.0)/8.0)*8.0)/255.0;
