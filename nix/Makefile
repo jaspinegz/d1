@@ -4,18 +4,12 @@ BUILDER_OPTS := \
 		--option builders-use-substitutes true \
 		--option always-allow-substitutes true
 
-BUILDERS_HB := \
-		ssh://builder@miniberry aarch64-darwin - 16 4 ; \
-		ssh://builder@publicproxy aarch64-linux - 4 1 ; \
-		ssh://builder@weirdfi.sh aarch64-linux - 4 1
+BUILDERS_HB :=
 
 BUILDERS := \
-		ssh://builder@hyperberry x86_64-linux - 16 2 ; \
-		ssh://builder@miniberry aarch64-darwin - 16 4 ;
+		ssh://builder@hyperberry x86_64-linux - 16 2 ;
 
-BUILDERS_WIFI_OUT := \
-		ssh://builder@publicproxy aarch64-linux - 4 1 ; \
-		ssh://builder@weirdfi.sh aarch64-linux - 4 1 ;
+BUILDERS_WIFI_OUT :=
 
 HOME_MANAGER := home-manager --extra-experimental-features "nix-command flakes"
 

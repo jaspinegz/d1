@@ -26,7 +26,7 @@
     "agenix-secrets": {
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-+7oWCnPbDlkp7qdwYCvf669DAw8aqqvGNPPDnE5Bmw4=",
+        "narHash": "sha256-BfoXzvSd/pH4nayHkkZu4d+FKP2ANsc83b0mRSTn85o=",
         "path": "./agenix-secrets",
         "type": "path"
       },
@@ -831,7 +831,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-78kN4397qLSkvp8IpNE/XJKzaRHqXTJXB2jdpE93COc=",
+        "narHash": "sha256-/eQBDlWUWMQqR9ctYRABZMjMxhQQvNw02jiyY0yqTlc=",
         "path": "./vendor/mandoc",
         "type": "path"
       },
@@ -914,7 +914,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-bn45r6ry064KM6lJnY/oEdid38eejAdqOR/d3Hw6D2c=",
+        "narHash": "sha256-hfrRwxtHW9N+r/Lm2PENytTs+T4kTzsY8l70xcz0JHI=",
         "path": "./vendor/neoforge-1-21-1",
         "type": "path"
       },

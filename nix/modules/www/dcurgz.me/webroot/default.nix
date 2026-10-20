@@ -39,13 +39,45 @@ in
             };
           });
         };
+        templates = lib.mkOption {
+          type = lib.types.attrsOf lib.types.str;
+        };
+        lib = lib.mkOption {
+          type = lib.types.attrsOf lib.types.anything;
+        };
       };
 
-      config.by.websites.sites.${domain}.web-server.webroot = pkgs.linkFarm "${domain}-webroot" [
-        {
-          name = "index.html";
-          path = ./index.html;
-        }
-      ];
+      config.by.websites.sites.${domain}.web-server.webroot =
+        let
+          cfg = config.by.www.${domain};
+
+          removeLeadingSlash = uri:
+            lib.strings.substring 1 (builtins.stringLength uri) uri;
+
+          files = builtins.map (page: {
+            name = (removeLeadingSlash page.slug) + "index.html";
+            path = page.src;
+          }) cfg.pages;
+          permalinks = builtins.map (page: {
+            name = (removeLeadingSlash page.permalink) + "index.html";
+            path = page.src;
+          }) (builtins.filter (x: x.permalink != null) cfg.pages);
+          resources = [
+            {
+              name = "style.css";
+              path = (stdenv.mkDerivation {
+                name = "compiled-styles";
+                src = ./stylesheets;
+                buildPhase = ''
+                  cat *.css > ./output.css
+                '';
+                installPhase = ''
+                  cp ./output.css $out
+                '';
+              });
+            }
+          ];
+        in
+        pkgs.linkFarm "webroot" (files ++ permalinks ++ resources);
     });
 }

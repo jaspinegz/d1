@@ -1,0 +1,303 @@
+/* vim: ts=2:sw=2
+/* thanks https://causal.agency for the inspiration <3 */
+:root {
+  --bg: "white";
+}
+
+html {
+  font-family: 'Hack', monospace;
+  line-height: 1.25em;
+  background-color: var(--bg);
+  color: var(--fg);
+  scroll-behavior: smooth;
+}
+
+h1 { font-size: 14pt; }
+li { margin: 1em 0; }
+
+.Bf.Sy { font-weight: bold; }
+
+* { scroll-margin-top: 10px; }
+
+body {
+  max-width: 80ch;
+  margin: 1em auto;
+  padding: 0 1ch;
+}
+
+.colour-palette {
+  width: 10ch;
+  height: 2ch;
+}
+
+.colour-box {
+  display: inline-block;
+  width: 20%;
+  height: 100%;
+}
+
+.colour-box-1 { background-color: var(--c1); }
+.colour-box-2 { background-color: var(--c2); }
+.colour-box-3 { background-color: var(--c3); }
+.colour-box-4 { background-color: var(--c4); }
+.colour-box-5 { background-color: var(--c5); }
+
+table.head, table.foot { width: 100%; }
+td.head-rtitle, td.foot-os { text-align: right; }
+td.head-vol { text-align: center; }
+div.Pp { margin: 1ex 0; }
+div.Nd, div.Bf, div.Op { display: inline; }
+span.Pa, span.Ad { font-style: italic; }
+span.Ms { font-weight: bold; }
+dl.Bl-diag > dt { font-weight: bold; }
+code.Nm, code.Fl, code.Cm, code.Ic, code.In, code.Fd, code.Fn,
+code.Cd {
+  font-weight: bold;
+  font-family: inherit;
+}
+
+div.head, div.foot {
+  display: flex;
+  justify-content: space-between;
+}
+.head-ltitle, .foot-date { flex: 1; }
+.head-vol {
+  flex: 0 1 auto;
+  text-align: center;
+}
+.head-rtitle, .foot-os {
+  flex: 1;
+  text-align: right;
+}
+
+table { border-collapse: collapse; }
+table.Nm code.Nm { padding-right: 1ch; }
+table.foot { margin-top: 1em; }
+
+a { color: var(--c1); }
+a.Sx:before { content: "→ "; }
+
+.Bf.Em { font-style: italic; }
+
+.Bd {
+  margin: 1em 0;
+  padding: 1em;
+  border-radius: 6px;
+  border: 1px solid var(--c2);
+  background-color: var(--bg-darken);
+  font-size: 11pt;
+  text-indent: 0pt !important;
+}
+
+pre {
+  margin: 0;
+  overflow: scroll;
+}
+
+.Bd.info,
+.Bd.warn {
+  border: 1px solid;
+  border-left-width: 12px;
+  background-color: var(--bg-darken);
+  padding: 1ch;
+}
+
+.Bd.info pre,
+.Bd.warn pre {
+  overflow: hidden;
+  white-space: wrap;
+}
+
+.Bd.info { border-color: var(--c3); }
+.Bd.warn { border-color: var(--c2); }
+
+.Bd.aside { border: 1px dashed var(--c2); }
+
+.Bd.quote { border: none; margin-left: 3ch; margin-right: 3ch; }
+
+/* prevent bottom margin when using paragraphs inside display blocks */
+.Bd .Pp { margin-bottom: 0; }
+
+.tags span {
+  border-radius: 6px;
+  border: 1px dashed var(--c1);
+  color: var(--c1);
+  padding: 2px;
+}
+
+code.inline {
+  padding: 2px;
+  border: 1px solid var(--c2);
+  border-radius: 6px;
+  font-style: italic;
+  font-size: 11pt;
+}
+
+ul p { margin: 1ch; }
+
+sup {
+  font-size: 0.7em;
+  vertical-align: top;
+  position: relative;
+  top: -0.5em;
+}
+
+:target {
+  background-color: var(--highlight);
+  animation: targetFadeIn 0.5s linear;
+}
+
+@keyframes targetFadeIn {
+  0% { background-color: var(--bg); }
+  100% { background-color: var(--highlight); }
+}
+
+/* anchor for top of page */
+#NAME {
+  anchor-name: --anchor-head;
+}
+
+/* TODO generalize this */
+.Bd.aside-left-head-1,
+.Bd.aside-right-head-1 {
+  position-anchor: --anchor-head;
+  position: absolute;
+  border: none;
+}
+.Bd.aside-left-head-1 { anchor-name: --anchor-left-head-1; }
+.Bd.aside-right-head-1 { anchor-name: --anchor-right-head-1; }
+
+.Bd.aside-left-head-2,
+.Bd.aside-right-head-2 {
+  border: none;
+  position: absolute;
+}
+.Bd.aside-left-head-2  { position-anchor: --anchor-left-head-1;  }
+.Bd.aside-right-head-2 { position-anchor: --anchor-right-head-1; }
+
+.Bd.aside-decoration-marble-plant:after {
+  background: url("/marbled-healthy.png");
+  width: 114px;
+  height: 432px;
+  content: "";
+  display: inline-block;
+  background-size: 114px 432px;
+  image-rendering: pixelated;
+  margin-left: 4ch;
+}
+.Bd.aside-decoration-placeholder:after {
+  background: url("/under-construction.png");
+  width: 176px;
+  height: 432px;
+  content: "";
+  display: inline-block;
+  background-size: 176px 432px;
+  image-rendering: pixelated;
+  border: 1px solid black;
+}
+
+.anchor-1 { anchor-name: --anchor-1; }
+.anchor-2 { anchor-name: --anchor-2; }
+.anchor-3 { anchor-name: --anchor-3; }
+.anchor-4 { anchor-name: --anchor-4; }
+.anchor-5 { anchor-name: --anchor-5; }
+.anchor-6 { anchor-name: --anchor-6; }
+.anchor-7 { anchor-name: --anchor-7; }
+.anchor-8 { anchor-name: --anchor-8; }
+.anchor-9 { anchor-name: --anchor-9; }
+
+.Bd.aside-1 { position: absolute; position-anchor: --anchor-1; }
+.Bd.aside-2 { position: absolute; position-anchor: --anchor-2; }
+.Bd.aside-3 { position: absolute; position-anchor: --anchor-3; }
+.Bd.aside-4 { position: absolute; position-anchor: --anchor-4; }
+.Bd.aside-5 { position: absolute; position-anchor: --anchor-5; }
+.Bd.aside-6 { position: absolute; position-anchor: --anchor-6; }
+.Bd.aside-7 { position: absolute; position-anchor: --anchor-7; }
+.Bd.aside-8 { position: absolute; position-anchor: --anchor-8; }
+.Bd.aside-9 { position: absolute; position-anchor: --anchor-9; }
+
+/* aside styling */
+.Bd.aside {
+  color: var(--fg-lighten);
+  font-size: smaller;
+  font-style: italic;
+}
+
+/* aside positioning */
+.Bd.aside-left-head-1,
+.Bd.aside-right-head-1,
+.Bd.aside-1,
+.Bd.aside-2,
+.Bd.aside-3,
+.Bd.aside-4,
+.Bd.aside-5,
+.Bd.aside-6,
+.Bd.aside-7,
+.Bd.aside-8,
+.Bd.aside-9 { 
+  position: absolute;
+  position-visibility: always;
+  width: 30ch;
+  top: anchor(top);
+  left: anchor(right);
+}
+
+.Bd.aside-1,
+.Bd.aside-2,
+.Bd.aside-3,
+.Bd.aside-4,
+.Bd.aside-5,
+.Bd.aside-6,
+.Bd.aside-7,
+.Bd.aside-8,
+.Bd.aside-9 { 
+  margin-left: 4ch;
+}
+
+/* aside head cascading */
+.Bd.aside-left-head-2,
+.Bd.aside-right-head-2 {
+  position: absolute;
+  position-visibility: always;
+  width: 30ch;
+  top: anchor(bottom);
+  left: anchor(left);
+}
+
+/* alternate side */
+.Bd.aside-left-head-1,
+.Bd.aside-left-head-2,
+.Bd.aside-2,
+.Bd.aside-4,
+.Bd.aside-6,
+.Bd.aside-8 {
+  left: 0;
+  right: anchor(left);
+  margin-left: auto;
+}
+
+/* TODO */
+#canvas {
+  border-radius: 10px;
+}
+
+.Bd.aside-left-head-2 {
+  right: anchor(right);
+}
+
+.Bd.aside-2,
+.Bd.aside-4,
+.Bd.aside-6,
+.Bd.aside-8 {
+  margin-right: 4ch;
+}
+
+@media only screen and (max-width: 1050px) {
+  /* disable aside positioning */
+  .Bd.aside {
+    position: static;
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
