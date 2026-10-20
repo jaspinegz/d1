@@ -27,13 +27,7 @@ in
         domain = domain;
         acme.enable = true;
         cloudflare.enable = true;
-        anubis = {
-          enable = true;
-          ports = {
-            bind = ports.internal.anubis + 1;
-            target = ports.internal.nginx + 1;
-          };
-        };
+        anubis.enable = false; # Unfortunately, I need AI screening to see this.
         web-server = {
           enable = true;
           # webroot is defined under ./webroot
