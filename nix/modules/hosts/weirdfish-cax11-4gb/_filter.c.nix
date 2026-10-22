@@ -1,3 +1,9 @@
+# vim: set ft=c:syntax=c
+{
+  pkgs,
+}:
+
+''
 #include <err.h>
 #include <fnmatch.h>
 #include <stdio.h>
@@ -24,3 +30,4 @@ int main(int argc, char *argv[]) {
   }
   return 1;
 }
+''

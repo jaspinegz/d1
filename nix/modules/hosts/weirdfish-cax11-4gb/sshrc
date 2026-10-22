@@ -48,7 +48,21 @@ the weirdfi.sh web interface.
 cgit will display a description for the repository on the web interface
 by reading the .git/description file inside the Git repository. You can
 configure this file to set a repository description.
+
+This server supports an automatic mirror feature through a MIRRORFILE. The
+MIRRORFILE should be stored at /data/git/$USERNAME/MIRRORFILE. Write a
+MIRRORFILE in the following format to clone and fetch an upstream repository
+URL once per day:
+
+  https://github.com/path/to/repo1.git ; name1.git ; A short description of the repository.
+  https://github.com/path/to/repo2.git ; name1.git ; A short description of the repository.
+  ...
+
+Note that, at the moment, repositories created by the MIRRORFILE are owned by
+root, so you will not be able to delete them once they are created. If you need
+a repository mirror disabled, remove it from the MIRRORFILE and ask your system
+administrator to delete the directory.
   
-Please contact your administrator (Jasper) if you have any issues."
+If you have any issues or need a new feature, just let me know."
 
 cd /data/git/$USERNAME

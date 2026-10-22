@@ -11,6 +11,7 @@ let
   inherit (args.config.by) keys;
 
   hostName = "weirdfi.sh";
+  git-root = "/data/git";
 
   genAttrs' = names: f: lib.listToAttrs (map f names);
   stripLocation = cfg: lib.removeSuffix "/" cfg.nginx.location;
@@ -179,8 +180,7 @@ in
               ${pkgs.git}/bin/git apply ${./cgit-about-subtree.patch}
             '';
           });
-          git-root = "/data/git/";
-          about-filter = ./about-filter.c;
+          about-filter = pkgs.writeText "filter.c" (import ./_filter.c.nix { inherit pkgs; });
           about-filter' = pkgs.stdenv.mkDerivation {
             name = "about-filter";
             src = about-filter;
@@ -257,6 +257,50 @@ in
               };
           };
         };
+
+      systemd.services."git.weirdfi.sh-mirrors" =
+        let
+          mirror = pkgs.writeText "mirror.c" (import ./_mirror.c.nix { inherit pkgs; });
+          mirror' = pkgs.stdenv.mkDerivation {
+            name = "mirror";
+            src = mirror;
+            dontUnpack = true;
+            nativeBuildInputs = with pkgs; [ gcc ];
+            buildPhase = ''
+              gcc $src -o a.out
+            '';
+            installPhase = ''
+              mkdir -p $out/bin
+              cp -v ./a.out $out/bin/mirror
+              chmod +x $out/bin/mirror
+            '';
+            meta.mainProgram = "mirror";
+          };
+        in
+        {
+          enable = true;
+          path = with pkgs; [ git ];
+          serviceConfig = {
+            Type = "oneshot";
+            RemainAfterExit = true;
+            ExecStart = pkgs.writeScript "mirror.sh" ''
+              #!${pkgs.bash}/bin/bash
+              set -x
+              ${mirror'}/bin/mirror ${git-root}/jaspine/MIRRORFILE || true
+              ${mirror'}/bin/mirror ${git-root}/citrus/MIRRORFILE || true
+              ${mirror'}/bin/mirror ${git-root}/natter/MIRRORFILE || true
+            '';
+          };
+        };
+
+      systemd.timers."git.weirdfi.sh-mirrors" = {
+        enable = true;
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnCalendar = "*-*-* 05:00:00";
+          Persistent = true;
+        };
+      };
 
       age.secrets = {
         restic-password.file = "${inputs.agenix-secrets}/agenix/${hostName}/restic-password.age";
