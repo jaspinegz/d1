@@ -1,0 +1,54 @@
+#!${pkgs.bash}/bin/bash
+[[ $- != *i* ]] && return
+USERNAME=$(whoami)
+[[ "$USERNAME" == "root" ]] && return
+EXTERNAL_IP=$(curl -s https://ipinfo.io/ip)
+echo ""
+echo "Welcome to the weirdfi.sh Git SSH server. Git repositories are placed
+in /data/git, and the administrator should have configured a writable
+directory for you at /data/git/$USERNAME.
+
+Note that the weirdfi.sh HTTP endpoint is behind a Cloudflare proxy. In
+order to pull/push to the weirdfi.sh Git server, you must use its
+direct IPv4 address ($EXTERNAL_IP). It is recommended to define this
+IPv4 address in your ~/.ssh/config file for convenience:
+
+  Host weirdfish
+    HostName $EXTERNAL_IP
+    User $USERNAME
+
+To configure the weirdfi.sh Git server in your local Git project, run
+the following command:
+
+  git remote add weirdfish $USERNAME@$EXTERNAL_IP:/data/git/$USERNAME/<repo name>.git
+
+Alternatively, if you have configured an SSH host entry (e.g. weirdfish),
+you may use that instead:
+
+  git remote add weirdfish weirdfish:/data/git/$USERNAME/<repo name>.git
+
+Afterwards, run these commands to fetch the Git server's history, and
+then configure it as your default Git remote.
+
+  git fetch weirdfish
+  git branch -u weirdfish/<branch>
+
+The weirdfi.sh HTTP endpoint uses cgit to render a web interface. cgit
+will display any world-readable Git repository under /data/git. To
+create a new Git repository, run the following command:
+
+  git init --bare name.git
+
+If you wish to create a private repository, you may change the permissions of
+the repository directory. Note that private repositories will not be visible in
+the weirdfi.sh web interface.
+
+  chmod -R 700 ./name.git
+
+cgit will display a description for the repository on the web interface
+by reading the .git/description file inside the Git repository. You can
+configure this file to set a repository description.
+  
+Please contact your administrator (Jasper) if you have any issues."
+
+cd /data/git/$USERNAME
