@@ -20,11 +20,13 @@ in
       home.packages = with pkgs; [
         maple-mono.truetype # for IDE
         maple-mono.NF # for terminal
+        hack-font
+        gyre-fonts
       ];
 
       fonts.fontconfig.enable = true;
       fonts.fontconfig.defaultFonts = {
-        monospace = [ "Maple Mono" ];
+        monospace = [ "Maple Mono" "Hack" ];
       };
     });
 }

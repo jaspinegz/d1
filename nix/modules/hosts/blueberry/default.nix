@@ -189,6 +189,7 @@ in
         # Editors
         pkgs-aseprite.aseprite
         darktable
+        blender
         zed-editor
         helix
         libreoffice

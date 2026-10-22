@@ -26,8 +26,9 @@
     naersk.url = "github:nix-community/naersk";
     nfsm.inputs.nixpkgs.follows = "nixpkgs";
     nfsm.url = "github:gvolpe/nfsm?rev=211eb44e77ce0b6e10f32b15f78f8aee5340fcbd"; # https://github.com/gvolpe/nfsm/pull/3/changes/211eb44e77ce0b6e10f32b15f78f8aee5340fcbd
+    #TODO:use epireyn fork while sodiboo is busy
     niri.inputs.nixpkgs.follows = "nixpkgs";
-    niri.url = "github:sodiboo/niri-flake";
+    niri.url = "github:epireyn/niri-flake";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
