@@ -10,6 +10,8 @@ let
   inherit (args.config) flake;
   inherit (args.config.by) keys;
 
+  hostName = "weirdfi.sh";
+
   genAttrs' = names: f: lib.listToAttrs (map f names);
   stripLocation = cfg: lib.removeSuffix "/" cfg.nginx.location;
 in
@@ -333,6 +335,33 @@ in
               };
           };
         };
+
+      age.secrets = {
+        restic-password.file = "${inputs.agenix-secrets}/agenix/${hostName}/restic-password.age";
+        restic-envvars.file = "${inputs.agenix-secrets}/agenix/${hostName}/restic-envvars.age";
+      };
+
+      by.restic.enable = true;
+      by.restic.defaults = {
+        initialize = true;
+        pruneOpts = [
+          "--keep-monthly=28"
+        ];
+        timerConfig = {
+          OnCalendar = "*-*-* 06:00:00";
+          Persistent = true;
+        };
+        repository = "s3:s3.eu-central-1.s4.mega.io/restic-git.weirdfi.sh";
+        passwordFile = config.age.secrets.restic-password.path;
+        environmentFile = config.age.secrets.restic-envvars.path;
+        progressFps = 0.5;
+      };
+      # TODO: WARNING: pruneOpts are currently global
+      by.restic.backups = {
+        git-weirdfish = {
+          paths = [ "/data/git" ];
+        };
+      };
 
       system.stateVersion = "24.05";
     });

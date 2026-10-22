@@ -31,8 +31,8 @@ with keys.ssh.hosts;
   "agenix/tailscale/guests/vm-vikunja.age".publicKeys      = (withDefault vm-vikunja.keys);
   "agenix/tailscale/guests/vx-jupiter.age".publicKeys      = (withDefault vx-jupiter.keys);
   # hyperberry
-  "agenix/backup/restic-password.age".publicKeys     = (withDefault hyperberry.keys);
-  "agenix/backup/restic-envvars.age".publicKeys      = (withDefault hyperberry.keys);
+  "agenix/hyperberry/restic-password.age".publicKeys = (withDefault hyperberry.keys);
+  "agenix/hyperberry/restic-envvars.age".publicKeys  = (withDefault hyperberry.keys);
   "agenix/hyperberry/jenkins-gpg-key.age".publicKeys = (withDefault hyperberry.keys);
   "agenix/hyperberry/jjb-token.age".publicKeys       = (withDefault hyperberry.keys);
   # fooberry
@@ -43,7 +43,9 @@ with keys.ssh.hosts;
   # tauberry
   "agenix/tauberry/mopidy-conf.age".publicKeys       = (withDefault tauberry.keys);
   # weirdfi.sh
-  "agenix/weirdfi.sh/cloudflare-key.age".publicKeys  = (withDefault vm-gos-update-server.keys);
+  "agenix/weirdfi.sh/cloudflare-key.age".publicKeys  = (withDefault weirdfish-cax11-4gb.keys);
+  "agenix/weirdfi.sh/restic-password.age".publicKeys = (withDefault weirdfish-cax11-4gb.keys);
+  "agenix/weirdfi.sh/restic-envvars.age".publicKeys  = (withDefault weirdfish-cax11-4gb.keys);
   # wg
   "agenix/wg/Wi-Fi.age".publicKeys = (withDefault wg.keys);
 }

@@ -8,6 +8,8 @@
 let
   inherit (args.config) flake;
   inherit (args.config.by) keys;
+
+  hostName = "hyperberry";
 in
 {
   flake.nixosConfigurations.hyperberry = flake.lib.mkNixOS rec {
@@ -143,8 +145,8 @@ in
       programs.fish.enable = true;
 
       age.secrets = {
-        restic-password.file = "${inputs.agenix-secrets}/agenix/backup/restic-password.age";
-        restic-envvars.file = "${inputs.agenix-secrets}/agenix/backup/restic-envvars.age";
+        restic-password.file = "${inputs.agenix-secrets}/agenix/${hostName}/restic-password.age";
+        restic-envvars.file = "${inputs.agenix-secrets}/agenix/${hostName}/restic-envvars.age";
       };
 
       by.restic.enable = true;

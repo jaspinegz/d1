@@ -57,7 +57,8 @@ let
     (mkGroupHost "tauberry"   ["host" "tauberry"]  [g_WG])
     (mkGroupHost "fooberry"   ["host" "root"]      [g_CRZ])
 
-    (mkGroupHost "publicproxy"   ["host"]      [g_EXT])
+    (mkGroupHost "weirdfish-cax11-4gb"   ["host"]      [g_EXT])
+    (mkGroupHost "publicproxy"           ["host"]      [g_EXT])
 
     (mkGuest "vm-claude")
     (mkGuest "vm-immich")
