@@ -55,7 +55,8 @@ MIRRORFILE in the following format to clone and fetch an upstream repository
 URL once per day:
 
   https://github.com/path/to/repo1.git ; name1.git ; A short description of the repository.
-  https://github.com/path/to/repo2.git ; name1.git ; A short description of the repository.
+  https://github.com/path/to/repo2.git ; name2.git ; A short description of the repository.
+  https://github.com/path/to/repo3.git ; subdirectory/name3.git ; A short description of the repository.
   ...
 
 Note that, at the moment, repositories created by the MIRRORFILE are owned by

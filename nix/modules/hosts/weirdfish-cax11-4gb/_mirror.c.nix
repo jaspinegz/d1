@@ -48,6 +48,7 @@ int main(int argc, char *argv[]) {
         printf("link=%s\n", link);
         char *name = strtok_r(NULL, delim, &_saveptr);
         printf("name=%s\n", name);
+        strtok_r(NULL, " \t", &_saveptr);
         char *description = strtok_r(NULL, ";", &_saveptr);
         printf("desc=%s\n", description);
         while (description[0] == ";" || description[0] == " ")
