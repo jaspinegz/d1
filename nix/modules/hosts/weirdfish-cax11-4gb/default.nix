@@ -188,6 +188,25 @@ in
       };
       users.groups.cgit = { };
 
+      by.websites =
+        let
+          domain = "git.weirdfi.sh";
+        in
+        {
+          enable = true;
+          sites.${domain} = {
+            inherit domain;
+            acme.enable = true;
+            cloudflare.enable = true;
+            anubis = {
+              enable = true;
+              ports.bind   = config.by.portmap.internal.anubis + 1;
+              ports.target = config.by.portmap.internal.cgit;
+            };
+            # leave webserver undefined for special cgit fastcgi
+          };
+        };
+
       services.fcgiwrap.instances."cgit-weirdfish" = {
         process = {
           user = "cgit";
@@ -253,9 +272,17 @@ in
         in
         {
           enable = lib.mkForce true;
-          virtualHosts."git.weirdfi.sh" = {
-            enableACME = true;
-            forceSSL = true;
+          virtualHosts."cgit-post-filter" = {
+            listen = [
+              {
+                addr = "[::1]";
+                port = config.by.portmap.internal.cgit;
+              }
+            ];
+            serverName = "git.weirdfi.sh";
+            extraConfig = ''
+              port_in_redirect off;
+            '';
             locations =
               (genAttrs' [ "cgit.css" "cgit.js" "cgit.png" "favicon.ico" ] (
                 fileName:
