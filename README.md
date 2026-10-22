@@ -1,3 +1,3 @@
-## d1: jaspine monorepo
+## infra: jaspine's personal infrastructure.
 
-A collection of software, tools and configurations maintained by me.
+A collection of software, tools and configurations maintained by Jasper.
