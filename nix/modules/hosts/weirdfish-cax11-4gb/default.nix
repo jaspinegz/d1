@@ -40,6 +40,10 @@ in
             users = [ "citrus" ];
             keys = keys.ssh.friends.citrus.paths;
           }
+          {
+            users = [ "natter" ];
+            keys = keys.ssh.friends.natter.paths;
+          }
         ];
       }
       nixos.linux-builder
@@ -100,6 +104,7 @@ in
         "d /data/git          755   root      git"
         "d /data/git/jaspine  755   jaspine   git"
         "d /data/git/citrus   755   citrus    git"
+        "d /data/git/natter   755   natter    git"
       ];
 
       services.gitDaemon = {
@@ -165,8 +170,12 @@ in
       };
       users.groups.git = { };
 
-      # citrus has RW access to /data/git/citrus/* repositories.
+      # citrus,natter have RW access to /data/git/<username>/* repositories.
       users.users.citrus = {
+        isNormalUser = true;
+        group = "git";
+      };
+      users.users.natter = {
         isNormalUser = true;
         group = "git";
       };

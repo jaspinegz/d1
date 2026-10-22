@@ -788,7 +788,7 @@
     "keys-natter": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-805+2BbOuGpfWghgOlfv+ILmQJsFfWPjmGFQbVHAK0I=",
+        "narHash": "sha256-d6xi4mKdjkX2JFicDIv5niSzpyI0m/Hnm8GGAIU04kY=",
         "type": "file",
         "url": "https://github.com/Naterjack.keys"
       },
@@ -831,11 +831,7 @@
       },
       "locked": {
         "lastModified": 1,
-<<<<<<< Updated upstream
         "narHash": "sha256-/eQBDlWUWMQqR9ctYRABZMjMxhQQvNw02jiyY0yqTlc=",
-=======
-        "narHash": "sha256-cDuoa2nx98kaC2rVepDjxcLOebMsjYJtE7igCSN8kRw=",
->>>>>>> Stashed changes
         "path": "./vendor/mandoc",
         "type": "path"
       },
@@ -1405,11 +1401,11 @@
     },
     "nixpkgs_7": {
       "locked": {
-        "lastModified": 1792506237,
-        "narHash": "sha256-Q/8KLB6jNfpaUN1HAedE/u/Et9feE/zYSsutBLKrCFk=",
+        "lastModified": 1781607440,
+        "narHash": "sha256-rxO+uc/KFbSJp+pgyXRuAX6QlG9hJdnt0BXpEQRXY+U=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5adc50831c259f87faeb09ddf930d43597197473",
+        "rev": "3e41b24abd260e8f71dbe2f5737d24122f972158",
         "type": "github"
       },
       "original": {
@@ -2078,11 +2074,11 @@
     "xwayland-satellite-unstable": {
       "flake": false,
       "locked": {
-        "lastModified": 1784679892,
-        "narHash": "sha256-Mb7jpqnrcYCfNSItIkkHpuR3YxWFxPuIBfcwNKlRBkk=",
+        "lastModified": 1781226823,
+        "narHash": "sha256-28696iIw8uE0ZUyFTtzhEM8xMh85clCYypMxkvUi+sc=",
         "owner": "Supreeeme",
         "repo": "xwayland-satellite",
-        "rev": "8d135d3b2854b30fd01ea6cd6c27e523dd50a839",
+        "rev": "8575d0ef55d70f9b4c46b6bffb3accf912217e1e",
         "type": "github"
       },
       "original": {
