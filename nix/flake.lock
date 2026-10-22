@@ -776,7 +776,7 @@
     "keys-citrus": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-jSitMPXaNyAID8R2bq+MWjG2UhWpkLTMMLjNNlNxWi0=",
+        "narHash": "sha256-JD6gs1y0Ivm1805/UimAKeG0IlZdI9gxk0X9rdU84nU=",
         "type": "file",
         "url": "https://github.com/citrus-tree.keys"
       },

@@ -36,6 +36,10 @@ in
             users = [ "root" "jaspine" "builder" "git" ];
             keys = keys.ssh.groups.privileged.paths;
           }
+          {
+            users = [ "citrus" ];
+            keys = keys.ssh.friends.citrus.paths;
+          }
         ];
       }
       nixos.linux-builder
@@ -93,7 +97,9 @@ in
       nix.settings.trusted-users = [ "jaspine" ];
 
       systemd.tmpfiles.rules = [
-        "Z /data/git 775 root wheel"
+        "d /data/git          755   root      git"
+        "d /data/git/jaspine  755   jaspine   git"
+        "d /data/git/citrus   755   citrus    git"
       ];
 
       services.gitDaemon = {
@@ -102,14 +108,18 @@ in
         port = config.by.portmap.internal.git-server;
       };
 
-      # Git user currently has RO access to all Git repositories.
-      # This is provided by the world-readable /data/git permissions.
-      # wheel has write access to the directory, so jaspine can make changes.
+      # Git user has RO access to all Git repositories.
       users.users.git = {
         isSystemUser = true;
         group = "git";
       };
       users.groups.git = { };
+
+      # citrus has RW access to /data/git/citrus/* repositories.
+      users.users.citrus = {
+        isNormalUser = true;
+        group = "git";
+      };
 
       # The cgit user is a privileged account that the cgit service runs as.
       users.users.cgit = {
@@ -224,12 +234,11 @@ in
 
                       enable-blame=1
 
-                      scan-path=${git-root} 
-
-                      repo.url=d1
-                      repo.path=/data/git/d1.git
-                      repo.desc=jaspine's monorepo
+                      scan-path=${git-root}
                     '';
+                    #repo.url=d1
+                    #repo.path=/data/git/d1.git
+                    #repo.desc=jaspine's monorepo
                   };
                   extraConfig = ''
                     fastcgi_pass unix:${config.services.fcgiwrap.instances."cgit-weirdfish".socket.address};
